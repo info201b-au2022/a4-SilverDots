@@ -18,6 +18,8 @@ test_query2 <- function(num=6) {
   return(v)
 }
 
+test <- get_data(num_records = 100)
+
 ## Section 2  ---- 
 #----------------------------------------------------------------------------#
 # Your functions and variables might go here ... <todo: update comment>
