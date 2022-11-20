@@ -5,24 +5,13 @@ rm(list = ls())
 # The functions might be useful for A4
 source("../source/a4-helpers.R")
 
-## Test queries ----
-#----------------------------------------------------------------------------#
-# Simple queries for basic testing
-#----------------------------------------------------------------------------#
-# Return a simple string
-test_query1 <- function() {
-  return ("Hello world")
-}
-
-# Return a vector of numbers
-test_query2 <- function(num=6) {
-  v <- seq(1:num)
-  return(v)
-}
+## Load the incarceration data file.
+incarceration_df <- get_data()
 
 ## Section 2  ----
 #----------------------------------------------------------------------------#
-# Your functions and variables might go here ... <todo: update comment>
+# **Data Summary**
+# 
 #----------------------------------------------------------------------------#
 
 ## Section 3  ----
@@ -62,5 +51,3 @@ plot_jail_pop_for_us <- function()  {
 # Your functions might go here ... <todo:  update comment>
 # See Canvas
 #----------------------------------------------------------------------------#
-
-## Load data frame ----
