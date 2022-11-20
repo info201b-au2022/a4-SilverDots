@@ -1,7 +1,8 @@
 ---
-title: "Your A4 Report Title (TODO: Revise title)"
-author: "Your Name"
-date: '2022-11-01'
+title: "Imprisonment Without Parole: Understanding America's Complex History of 
+Incarceration"
+author: "Richard Tran"
+date: '2022-11-18'
 output: html_document
 ---
 
@@ -13,28 +14,76 @@ source("../source/analysis.R")
 ## Abstract 
 [TODO: Include a short abstract (about 50 words)]
 
-# Test (TODO: Remove before submission!!)
-```{r echo=FALSE}
-q1_string <- test_query1()
-num <- 5
-```
-As you know, this is a markdown report. The [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) is **useful!**
-
-* Here's a test of a dynamic variable. Say **"`r q1_string`!!!** 
-* Here's another test. A vector
-of numbers: `r test_query2(num)`.
-
-Recall that _{r echo=TRUE}_ can be used to display the code, 
-which is very useful when developing and debugging a report. Here's an example: 
-
-```{r echo=TRUE}
-num <- 5
-sum <- sum(test_query2(num))
-print(sum)
-```
-
 ## Introduction 
-[TODO]
+From 1970 to 2014, the United States experienced an almost four-fold increase in
+its national prison population. The reasons for imprisonment abound; people
+often face pretrial detention, where sometimes innocent people are sent to jail
+to await trial, and prison overcrowding uses local jails to accept transfers
+from state and federal prisons. The Vera Institute's research shows that
+although the national jail admission rate has decreased in recent years, the
+active growth in the daily jail population suggests that the average length of
+stay has increased from its original rate of about nine days in 1970. However,
+the Vera Institute also reveals an interesting incarceration statistic: local
+jail populations in small and mid-sized counties have outpaced the growth rate
+of those in larger counties, contrary to the preconception that the opposite
+might be true. This means that the issue of mass incarceration is not
+endemic to a particular region, but rather, it's a national issue. In addition,
+the wide variation in incarceration rates across similarly situated counties
+suggests that incarceration rates are rooted in historic social disparities
+(Subramanian, Henrichson, and Kang-Brown 7-12).
+
+Central to this investigation are the **direct stakeholders** of this data:
+that is, the millions of people who are annually sentenced to legal confinement
+as a result of the American justice system. Addressing the causes for national
+prison growth requires open acknowledgement of the people who are perhaps
+disproportionately incarcerated for crimes and misdemeanors, so naturally,
+_freedom_ and _liberation_ are values that are closely connected to this data.
+Borrowing from the phrase, "three strikes and you're out," which roughly
+describes how criminals convicted of their third felony face life in prison,
+individuals classified as repeat offenders are sentenced to extended jail time,
+which only serves to increase the daily prison population. Likewise, innocent
+people under pretrial detention are highly vulnerable to developing mental
+health problems while in confinement, in large part due to the hostile
+environment fostered by jails and prisons. Both of these examples are only
+several of many which illustrate how the current judicial system works against
+those wrongly accused. It is by no means a coincidence, then, that external
+groups such as the American Legislative Exchange Council (ALEC) or Corrections
+Corporation of America (CCA, now CoreCivic), which stand to gain from the
+continued operation of jails and prisons are some of their strongest backers
+(Duvernay and Moran). For this reason, _democracy_ and _accountability_ are
+inherent to the Vera Institute data, for we must advocate for policy changes
+that hold policymakers accountable for not only _who gets incarcerated_, be
+it convicted criminals or troubled immigrants and other individuals awaiting
+trial, but also _why_ and _for how long_ they remain detained.
+
+Lastly, the data produced by the Vera Institute is not just a collection
+of statistics: it is a reflection of how failures in public policy have impacted
+human lives, a story of how confinement has shaped the lives, families,
+and communities of those subjected to time behind bars. Every person facing
+imprisonment brings with them a unique set of circumstances, and so extra care
+must be taken to understand how their background and identity could have played
+a factor in their incarceration. In other words, We must take initiative
+to analyze the data to shed light on not only the root causes of American mass
+incarceration, but also determine what steps the **indirect stakeholders** of
+this data, which includes whole communities, local support groups,
+organizations, systems designers, and policymakers, should take to resolve
+disparities in prison demographics. Rather than pouring economic resources into
+the construction of expensive prisons—which only works to perpetuate gender and
+racial disparities in incarceration—policymakers should consider how to
+productively reform the current penal system. To this end, the analysis in this
+report will highlight existing problem areas that could serve as a starting
+point from which to begin.
+
+In exploring the Vera Institute's data, the following questions will be
+addressed:
+* How does the number of people in pretrial detention in 2014 compare to
+the 1970?
+* What was the average incarceration rate of African Americans across the United
+States in 2014?
+* What was the average incarceration rate of White Americans across the United
+States in 2014?
+* Which counties saw the highest change in incarceration rates from 1970 to
+2014?
 
 ## Data Summary 
 [TODO]
@@ -43,3 +92,15 @@ print(sum)
 
 _All the very best with your work!_
 
+plot of all counties and the group with highest incarceration for each county
+
+approach
+communciating ifnroamtion through the absence of data
+lack thereof
+
+
+## References
+* Ava Duvernay, and Jason Moran. _13TH_. USA, 2016.
+* Ram Subramanian, Christian Henrichson, and Jacob Kang-Brown.
+_In Our Own Backyard: Confronting Growth and Disparities in
+American Jails_. New York, NY: Vera Institute of Justice, 2015.

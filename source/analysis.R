@@ -1,4 +1,6 @@
 library(tidyverse)
+library(dplyr)
+rm(list = ls())
 
 # The functions might be useful for A4
 source("../source/a4-helpers.R")
@@ -18,51 +20,47 @@ test_query2 <- function(num=6) {
   return(v)
 }
 
-test <- get_data(num_records = 100)
-
-## Section 2  ---- 
+## Section 2  ----
 #----------------------------------------------------------------------------#
 # Your functions and variables might go here ... <todo: update comment>
 #----------------------------------------------------------------------------#
 
-## Section 3  ---- 
+## Section 3  ----
 #----------------------------------------------------------------------------#
 # Growth of the U.S. Prison Population
 # Your functions might go here ... <todo:  update comment>
 #----------------------------------------------------------------------------#
 # This function ... <todo:  update comment>
 get_year_jail_pop <- function() {
-  # TODO: Implement this function 
-return()   
+  # TODO: Implement this function
+return()
 }
 
 # This function ... <todo:  update comment>
 plot_jail_pop_for_us <- function()  {
-  # TODO: Implement this function 
-  return()   
+  # TODO: Implement this function
+  return()
 } 
 
-## Section 4  ---- 
+## Section 4  ----
 #----------------------------------------------------------------------------#
-# Growth of Prison Population by State 
+# Growth of Prison Population by State
 # Your functions might go here ... <todo:  update comment>
 # See Canvas
 #----------------------------------------------------------------------------#
 
-## Section 5  ---- 
+## Section 5  ----
 #----------------------------------------------------------------------------#
 # <variable comparison that reveals potential patterns of inequality>
 # Your functions might go here ... <todo:  update comment>
 # See Canvas
 #----------------------------------------------------------------------------#
 
-## Section 6  ---- 
+## Section 6  ----
 #----------------------------------------------------------------------------#
 # <a map shows potential patterns of inequality that vary geographically>
 # Your functions might go here ... <todo:  update comment>
 # See Canvas
 #----------------------------------------------------------------------------#
 
-## Load data frame ---- 
-
-
+## Load data frame ----
