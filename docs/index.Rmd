@@ -78,6 +78,9 @@ In exploring the Vera Institute's data, the following questions will be
 addressed:
 * How does the number of people in pretrial detention in 2014 compare to
 the 1970?
+* When was the highest number of people in pretrial detention recorded?
+* Which counties had the highest pretrial detention rates in 2014, and what were
+their relative sizes?
 * What was the average incarceration rate of African Americans across the United
 States in 2014?
 * What was the average incarceration rate of White Americans across the United
@@ -87,7 +90,8 @@ States in 2014?
 
 ## Data Summary 
 [TODO]
-
+highest num was in 2018, illustrating how the number of people facing pretrial
+detention is only compounding each year.
 [TODO ... other sections ... See Canvas for details]
 
 _All the very best with your work!_
