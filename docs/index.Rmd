@@ -6,9 +6,12 @@ date: '2022-11-18'
 output: html_document
 ---
 
-```{r echo=FALSE, eval=TRUE, message=FALSE}
+```{r echo = FALSE, eval = TRUE, message = FALSE, include = FALSE}
 source("../source/a4-helpers.R")
 source("../source/analysis.R")
+library(english)
+library(knitr)
+library(kableExtra)
 ```
 
 ## Abstract 
@@ -17,8 +20,8 @@ source("../source/analysis.R")
 ## Introduction 
 From 1970 to 2014, the United States experienced an almost four-fold increase in
 its national prison population. The reasons for imprisonment abound; people
-often face pretrial detention, where sometimes innocent people are sent to jail
-to await trial, and prison overcrowding uses local jails to accept transfers
+often face pretrial detention, where they are sent to jail to await trial,
+and prison overcrowding uses local jails to accept transfers
 from state and federal prisons. The Vera Institute's research shows that
 although the national jail admission rate has decreased in recent years, the
 active growth in the daily jail population suggests that the average length of
@@ -34,27 +37,27 @@ suggests that incarceration rates are rooted in historic social disparities
 
 Central to this investigation are the **direct stakeholders** of this data:
 that is, the millions of people who are annually sentenced to legal confinement
-as a result of the American justice system. Addressing the causes for national
-prison growth requires open acknowledgement of the people who are perhaps
-disproportionately incarcerated for crimes and misdemeanors, so naturally,
-_freedom_ and _liberation_ are values that are closely connected to this data.
-Borrowing from the phrase, "three strikes and you're out," which roughly
-describes how criminals convicted of their third felony face life in prison,
-individuals classified as repeat offenders are sentenced to extended jail time,
-which only serves to increase the daily prison population. Likewise, innocent
-people under pretrial detention are highly vulnerable to developing mental
-health problems while in confinement, in large part due to the hostile
-environment fostered by jails and prisons. Both of these examples are only
-several of many which illustrate how the current judicial system works against
-those wrongly accused. It is by no means a coincidence, then, that external
-groups such as the American Legislative Exchange Council (ALEC) or Corrections
-Corporation of America (CCA, now CoreCivic), which stand to gain from the
-continued operation of jails and prisons are some of their strongest backers
-(Duvernay and Moran). For this reason, _democracy_ and _accountability_ are
-inherent to the Vera Institute data, for we must advocate for policy changes
-that hold policymakers accountable for not only _who gets incarcerated_, be
+by the American justice system. Addressing the causes for national
+jail and prison growth requires open acknowledgement of the people who are most
+disproportionately incarcerated, so naturally, _freedom_ and _liberation_ are
+values that are closely connected to this data. Borrowing from the phrase,
+"three strikes and you're out," which roughly describes how criminals convicted
+of their third felony face life in prison, individuals classified as repeat
+offenders are sentenced to extended jail time. However, this only works to
+increase the daily prison population. Likewise, innocent people under pretrial
+detention are highly vulnerable to developing mental health problems while in
+confinement, in large part due to the hostile environment of jails and prisons.
+Both of these examples are only several of many which illustrate how the current
+judicial system works against those wrongly accused. It is by no means a
+coincidence, then, that external groups such as the American Legislative
+Exchange Council (ALEC) or Corrections Corporation of America (CCA, now
+CoreCivic), which stand to gain from the continued operation of jails and
+prisons, are some of their strongest backers (Duvernay and Moran). For this
+reason, _democracy_ and _accountability_ are inherent to an analysis of this
+data. Based on our findings, we must advocate for policy changes that hold
+policymakers accountable for not only _who gets incarcerated_—be
 it convicted criminals or troubled immigrants and other individuals awaiting
-trial, but also _why_ and _for how long_ they remain detained.
+trial—but also _why_ and _for how long_ they remain detained.
 
 Lastly, the data produced by the Vera Institute is not just a collection
 of statistics: it is a reflection of how failures in public policy have impacted
@@ -76,22 +79,110 @@ starting point for further discussion.
 
 In exploring the Vera Institute's data, the following questions will be
 addressed:
+
 * How does the number of people in pretrial detention in 2014 compare to
 the 1970?
 * When was the highest number of people in pretrial detention recorded?
 * Which counties had the highest pretrial detention rates in 2014, and what were
 their relative sizes?
-* What was the average incarceration rate of African Americans across the United
-States in 2014?
-* What was the average incarceration rate of White Americans across the United
-States in 2014?
-* Which counties saw the highest change in incarceration rates from 1970 to
+* What was the average jail population rate of African Americans across the
+United States in 2014?
+* What was the average jail population rate of White Americans across the
+United States in 2014?
+* Which counties had the highest average prison population from 2000 to
 2014?
 
 ## Data Summary 
-[TODO]
-highest num was in 2018, illustrating how the number of people facing pretrial
-detention is only compounding each year.
+
+```{r format_vars, echo = FALSE}
+num_pretrial_diff <- prettyNum(num_pretrial_diff, big.mark = ",")
+
+top_pretrial_counties_str <- paste0("* ",
+                                   pull(top_pretrial_counties_2014, location),
+                                   collapse = "\n")
+
+num_rural <- top_pretrial_counties_2014 %>%
+  filter(urbanicity == "rural") %>%
+  nrow()
+
+if (num_rural != 1) {
+  num_rural <- paste(as.character(english(num_rural)), "were")
+} else {
+  num_rural <- paste(as.character(english(num_rural)), "was")
+}
+
+avg_aa_jail_rate <- round(avg_aa_jail_rate)
+
+avg_white_jail_rate <- round(avg_white_jail_rate)
+```
+
+According to the data provided by the Vera Institute, the difference in the
+national pretrial jail population count in 1970 and the same calculation in
+2014 was `r num_pretrial_diff`. This represents an almost five-fold increase in
+the number of people in jail awaiting trial since 1970. Even after accounting
+for population increases, this information alone is staggering. The contrast
+between the 1970 and 2014 pretrial jail population counts emphasizes some of
+the outstanding issues with the current justice system, including individuals'
+right to a "speedy trial."
+
+The year `r year_highest_pretrial_pop` saw the highest number of people in
+pretrial detainment. Connecting to the previous analysis on pretrial jail
+population counts, this implies that the number of people facing
+pretrial detention is only compounding with each year. Evidently, some form of
+action must be taken on behalf of policymakers to remedy this issue. Pretrial
+detention is largely counterproductive to correcting criminal behavior,
+especially in cases where individuals are wrongfully accused.
+
+The ten counties with the highest pretrial detention rates in 2014 were as
+follows:
+
+`r top_pretrial_counties_str`.
+
+Of the above counties, `r num_rural` designated as rural counties. This means
+that the counties with the highest pretrial detention rates were of rural/small
+size, which disproves the claim that the highest pretrial detention rates would
+be found in the counties with the greatest populations. The fact that smaller
+counties have observed higher pretrial detention rates demonstrates that the
+problem of mass incarceration is not restricted to the largest hubs of America,
+but rather, the issue is of national scale.
+
+The data uncovers some of the racial disparities related to incarceration in
+the United States. With reference to 2014, the average jail population rate of
+black Americans was about `r avg_aa_jail_rate` per one hundred thousand
+people, and yet the average jail population rate for white Americans in the
+same year was only about `r avg_white_jail_rate`. Viewed differently,
+white Americans were incarcerated at a rate fives times less than that of black
+Americans in 2014. That black Americans disproportionately represent
+the US jail population begs the question of whether or not racial biases
+in policing have played a role in the increased arrests of members of
+this racial group.
+
+From 2000 to 2014, the following counties observed the highest average prison
+population counts and rates:
+
+```{r county_prison_pop_tables, echo = FALSE}
+kable(counties_highest_avg_prison_pop,
+      caption = "Top Counties by Prison Population") %>%
+  kable_styling(full_width = FALSE,
+                position = "float_left")
+kable(counties_highest_avg_prison_rate,
+      caption = "Top Counties by Prison Population Rate per 100k People") %>%
+  kable_styling(full_width = FALSE,
+                position = "right")
+```
+
+While the top five counties by average prison population size are located in
+urban areas, the top five counties by average prison population rates are marked
+by rural, small/mid status. This observation bears resemblance to the earlier
+examination of the counties with the highest pretrial detention rates in 2014.
+In both cases, counties of rural to small status were found to have higher
+incarceration rates than counties of larger population, reinforcing the fact
+that incarceration rates are not simply a product of county population size.
+The issue of mass incarceration deserves recognition by agencies of all levels,
+including local communities whose lack of legal resources may cause the people
+living there to be underrepresented.
+
+
 [TODO ... other sections ... See Canvas for details]
 
 _All the very best with your work!_

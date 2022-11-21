@@ -23,11 +23,11 @@ features <- colnames(incarceration_df)
 #   2) When was the highest number of people in pretrial detention recorded?
 #   3) Which counties had the highest pretrial detention rates in 2014,
 #      and what were their relative sizes?
-#   4) What was the average incarceration rate of African Americans across the
-#      United States in 2014?
-#   5) What was the average incarceration rate of White Americans across the
-#      United States in 2014?
-#   6) Which counties saw the highest change in incarceration rates from 1970 to
+#   4) What was the average jail population rate of African Americans across
+#      the United States in 2014?
+#   5) What was the average jail population rate of White Americans across
+#      the United States in 2014?
+#   6) Which counties had the highest average prison population from 2000 to
 #     2014?
 #----------------------------------------------------------------------------#
 
@@ -37,6 +37,7 @@ num_pretrial_diff <- incarceration_df %>%
   filter(year == 1970 | year == 2014) %>%
   group_by(year) %>%
   summarize(pretrial_pop = sum(total_jail_pretrial, na.rm = TRUE)) %>%
+  arrange(year) %>%
   pull(pretrial_pop) %>%
   diff() %>%
   round
@@ -52,8 +53,51 @@ year_highest_pretrial_pop <- incarceration_df %>%
 #    and what were their relative sizes?
 top_pretrial_counties_2014 <- incarceration_df %>%
   filter(year == 2014) %>%
-  top_n(10, wt = total_jail_pretrial_rate, na.rm = TRUE) %>%
+  mutate(location = paste0(county_name, ", ", state)) %>%
+  top_n(10, wt = total_jail_pretrial_rate) %>%
+  select(location, urbanicity)
   
+# 4) What was the average jail population rate of African Americans across
+#    the United States in 2014?
+avg_aa_jail_rate <- incarceration_df %>%
+  filter(year == 2014) %>%
+  pull(black_jail_pop_rate) %>%
+  mean(na.rm = TRUE)
+
+# 5) What was the average jail population rate of White Americans across
+#    the United States in 2014?
+avg_white_jail_rate <- incarceration_df %>%
+  filter(year == 2014) %>%
+  pull(white_jail_pop_rate) %>%
+  mean(na.rm = TRUE)
+  
+# 6) Which counties had the highest average prison population from 2000 to
+#    2014?
+counties_highest_avg_prison_pop <- incarceration_df %>%
+  filter(year >= 2000 & year <= 2014) %>%
+  mutate(location = paste0(county_name, ", ", state)) %>%
+  group_by(location, urbanicity) %>%
+  summarize(avg_prison_pop = round(mean(total_prison_pop)),
+            .groups = "drop") %>%
+  top_n(5, wt = avg_prison_pop) %>%
+  rename("Location" = location,
+         "Prison Population" = avg_prison_pop,
+         "Urbanicity" = urbanicity
+  )
+
+# 7) Which counties had the highest average prison population rates from 2000
+#    to 2014?
+counties_highest_avg_prison_rate <- incarceration_df %>%
+  filter(year >= 2000 & year <= 2014) %>%
+  mutate(location = paste0(county_name, ", ", state)) %>%
+  group_by(location, urbanicity) %>%
+  summarize(mean_prison_rate = round(mean(total_prison_pop_rate)),
+            .groups = "drop") %>%
+  top_n(5, wt = mean_prison_rate) %>%
+  rename("Location" = location,
+         "Population Rate" = mean_prison_rate,
+         "Urbanicity" = urbanicity
+  )
 
 ## Section 3  ----
 #----------------------------------------------------------------------------#
