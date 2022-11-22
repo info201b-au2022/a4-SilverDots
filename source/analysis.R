@@ -102,12 +102,15 @@ counties_highest_avg_prison_rate <- incarceration_df %>%
 ## Section 3  ----
 #----------------------------------------------------------------------------#
 # Growth of the U.S. Prison Population
-# Your functions might go here ... <todo:  update comment>
+# This section contains functions responsible for data wrangling and charting
+# the growth of the U.S. prison population.
 #----------------------------------------------------------------------------#
-# This function ... <todo:  update comment>
+# Organizes 
 get_year_jail_pop <- function() {
-  # TODO: Implement this function
-return()
+  jail_pop_df <- incarceration_df %>%
+    group_by(year) %>%
+    summarize(total_pop = sum(total_jail_pop, na.rm = TRUE))
+  return(jail_pop_df)
 }
 
 # This function ... <todo:  update comment>
