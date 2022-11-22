@@ -15,7 +15,14 @@ library(kableExtra)
 ```
 
 ## Abstract 
-[TODO: Include a short abstract (about 50 words)]
+Incarceration rates in the United States have increased in recent years, but
+the issue does not revolve around population density so much as it
+is a reflection of emerging trends in the American justice system. Racial,
+gender, and population size disparities are among several of the many ways in
+which particular groups of people are disproportionately affected by mass
+incarceration. This report aims to illustrate some of the key inequalities
+and patterns associated with recent incarceration data as areas potential areas
+for reform.
 
 ## Introduction 
 From 1970 to 2014, the United States experienced an almost four-fold increase in
@@ -182,10 +189,39 @@ The issue of mass incarceration deserves recognition by agencies of all levels,
 including local communities whose lack of legal resources may cause the people
 living there to be underrepresented.
 
+## Charts and Plots
 
-[TODO ... other sections ... See Canvas for details]
+```{r jail_pop, echo = FALSE, message = FALSE}
+plot_jail_pop_for_us()
+```
 
-_All the very best with your work!_
+**How has the U.S. jail population changed over time?**
+
+According to records beginning in 1970, the U.S. jail population remained
+stable for about a decade until 1980, after which the number of people in jail
+began increasing at a steady rate. This growth peaked in the mid-2000s, after
+which the U.S. jail population decreased by only a few thousand before
+reaching its size in 2018. Based on data trend, the current U.S. jail
+population likely rests around 750,000 thousand people total.
+
+<br>
+
+```{r us_prison_pop_by_state, echo = FALSE, message = FALSE}
+plot(plot_jail_pop_by_states(c("CA", "TX", "SD", "NV", "KS", "PA")))
+```
+
+**How have state jail population counts changed over time in the United
+States?**
+
+The above line chart shows the growth of state jail populations from 1970 to
+2018 for the states of California, Kansas, Nevada, Pennsylvania, South Dakota,
+and Texas. These states were selected to show how jail populations tend to grow
+at a faster rate in states with higher population counts, such as California
+and Texas, than states with lower population counts, such as South Dakota. In
+most cases, jail population counts steadily increased between 1980 and the 
+mid 2000s, after which these counts began to stabilize or taper slightly.
+
+
 
 plot of all counties and the group with highest incarceration for each county
 
