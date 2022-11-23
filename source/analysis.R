@@ -272,19 +272,20 @@ plot_jail_gender_rates <- function() {
 #----------------------------------------------------------------------------#
 # Racial Groups with the Highest Incarceration Rates by County
 # This section contains functions for mapping the racial groups with the highest
-# incarceration rates in each county of the United States in 2015.
+# incarceration rates in each Southern county of the United States in 2015.
 #----------------------------------------------------------------------------#
-# Creates a tibble which maps U.S. counties to the racial group with the highest
-# prison population rates in 2015.
+# Creates a tibble which maps U.S. counties in the South to the racial group
+# with the highest jail and prison population rates in 2015.
 #
 # Returns:
 #   A tibble mapping U.S. counties to the racial group with the highest
 #   jail and prison population rate in 2015.
 get_most_incarcerated <- function() {
   top_incarcerated_by_county <- incarceration_df %>%
-    filter(year == 2015) %>%
+    filter(year == 2015, state %in% states_in_region("South")) %>%
     replace(is.na(.), 0) %>%
     mutate(location = paste(county_name, state, sep = ", "),
+           Code = state,
            subregion = tolower(str_sub(county_name, 0, -8)),
            "Asian American/Pacific Islander" = aapi_prison_pop_rate +
                                                aapi_jail_pop_rate,
@@ -292,30 +293,52 @@ get_most_incarcerated <- function() {
            "Latinx" = latinx_prison_pop_rate + latinx_jail_pop_rate,
            "Native American" = native_prison_pop_rate + native_jail_pop_rate,
            "White" = white_prison_pop_rate + white_jail_pop_rate) %>%
+    left_join(state_codes, by = "Code") %>%
+    mutate(region = tolower(State)) %>%
     gather(key = race, value = rate, `Asian American/Pacific Islander`,
            Black, Latinx, `Native American`, White) %>%
-    select(location, subregion, race, rate) %>%
+    select(location, subregion, race, rate, region) %>%
     group_by(location) %>%
     filter(rate > 0 & rate == max(rate)) %>%
-    left_join(map_data("county"), by = "subregion") %>%
-    ungroup() %>%
-    na.omit()
+    ungroup()
   return(top_incarcerated_by_county)
 }
 
 # Generates a choropleth map of counties and the most incarcerated racial group
-# in each county for the year 2015.
+# in Southern county for the year 2015.
 #
 # Returns:
 #   A choropleth map which is colored based on racial group for each U.S. county
-#   in 2015.
+#   in the South in 2015.
 plot_most_incarcerated_by_county <- function() {
-  plot_data <- get_most_incarcerated()
-  racial_plot <- leaflet(data = plot_data) %>%
-    addProviderTiles("CartoDB.Positron") %>%
-    setView(lat = 37.0902, lng = -95.7129, zoom = 4) %>%
-    addPolygons(lat = ~lat,
-                lng = ~long,
-                popup = ~location)
+  plot_data <- get_most_incarcerated() %>%
+    left_join(map_data("county"), by = c("subregion", "region"))
+  racial_plot <- ggplot(data = plot_data) +
+    geom_polygon(
+      mapping = aes(
+        x = long,
+        y = lat,
+        fill = race,
+        group = group
+      ),
+      color = "white",
+      size = 0.3
+    ) +
+    coord_map() +
+    theme(
+      axis.text.x = element_blank(),
+      axis.text.y = element_blank(),
+      axis.title = element_blank(),
+      axis.ticks = element_blank()
+    ) +
+    labs(
+      title = "Map of Racial Group with Highest Incarceration Rate in Each
+      Southern County of the U.S. (2015)",
+      fill = "Racial Group",
+      caption = "Black Americans consistently held the highest jail and
+      prison population rates in Southern counties of the U.S. in 2015\
+      Note: some counties are omitted for having unrecorded jail and prison
+      population rates"
+    )
   return(racial_plot)
 }
