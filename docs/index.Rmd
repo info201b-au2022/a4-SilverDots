@@ -16,13 +16,12 @@ library(kableExtra)
 
 ## Abstract 
 Incarceration rates in the United States have increased in recent years, but
-the issue does not revolve around population density so much as it
+the issue itself does not revolve around population density so much as it
 is a reflection of emerging trends in the American justice system. Racial,
 gender, and population size disparities are among several of the many ways in
 which particular groups of people are disproportionately affected by mass
-incarceration. This report aims to illustrate some of the key inequalities
-and patterns associated with recent incarceration data as areas potential areas
-for reform.
+incarceration. This report aims to identify key inequalities and patterns
+found in American incarceration data as potential areas for further reform.
 
 ## Introduction 
 From 1970 to 2014, the United States experienced an almost four-fold increase in
@@ -67,12 +66,12 @@ it convicted criminals or troubled immigrants and other individuals awaiting
 trial—but also _why_ and _for how long_ they remain detained.
 
 Lastly, the data produced by the Vera Institute is not just a collection
-of statistics: it is a reflection of how failures in public policy have impacted
+of statistics: is a reflection of how failures in public policy have impacted
 human lives, a story of how confinement has shaped the lives, families,
 and communities of those subjected to time behind bars. Every person facing
 imprisonment brings with them a unique set of circumstances, and so extra care
 must be taken to understand how their background and identity could have played
-a factor in their incarceration. In other words, We must take initiative
+a role in their incarceration. In other words, We must take initiative
 to analyze the data to shed light on not only the root causes of American mass
 incarceration, but also determine what steps the **indirect stakeholders** of
 this data, which includes whole communities, local support groups,
@@ -233,31 +232,38 @@ since 1980?**
 Although the previous chart of U.S. jail population growth shows how the
 national jail population has risen in the past few decades, it fails to uncover
 the nuances in jail population demographics. By contrast, this chart of average
-jail population rates for men and women, as separated by U.S. region, reveals
+jail population rates for men and women—as separated by U.S. region—reveals
 how in general, the jail population rate of men has increased at a larger rate
-than that of women. The most notable feature of this chart, however, is the fact
-that certain regions of U.S. appear to have higher jail growth rates than other
-regions. For instance, the jail population rates of both men and women
-experienced the largest growth in the Southern region of the United States
-than in the Midwest or the Northeast. A further case for analysis could be how
-these observations correlate to population makeup in each of these regions,
+than that of women since 1980. The most notable feature of this chart, however,
+is the fact that certain regions of U.S. appear to have higher jail growth rates
+than others. For instance, the jail population rates of both men and women
+saw the greater growth in the Southern region of the United States
+than in the Midwest or the Northeast. A question for further analysis could be
+how these observations correlate to population makeup in each of these regions,
 for it's possible that the higher jail population rates in regions like the
 South are tied to racial inequality.
 
 ## Racial Groups with the Highest Incarceration Rates by County
 
-#```{r county_map_highest_rates, echo = FALSE, message = FALSE}
-#plot(plot_jail_gender_rates())
-#```
+```{r county_map_highest_rates, echo = FALSE, message = FALSE}
+plot(plot_most_incarcerated_by_county())
+```
 
+**Which racial groups had the highest incarceration rates across Southern
+counties in 2015?**
 
-
-plot of all counties and the group with highest incarceration for each county
-
-approach
-communciating ifnroamtion through the absence of data
-lack thereof
-
+The above choropleth map clearly demonstrates some of the key racial disparities
+associated with mass incarceration. Namely, black Americans, represented by
+the olive color, are the most prevalent group on the map; that is, they account
+for the highest combined jail and prison population rates in the South. This
+finding is consistent with the population trends of and historic prejudice
+against black Americans living in the South, and it acts as a reminder that
+the issue of mass incarceration cannot be fully addressed without some
+acknowledgement that certain racial groups, and especially black Americans, are
+incarcerated at severely higher rates than others. This begs the question
+of whether or not black Americans also hold the highest jail and prison
+population rates in other regions of the United States, such as the West, where
+their population counts are not quite as high relative to other racial groups.
 
 ## References
 * Ava Duvernay, and Jason Moran. _13TH_. USA, 2016.

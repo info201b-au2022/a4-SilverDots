@@ -3,7 +3,6 @@ library(dplyr)
 library(stringr)
 library(ggplot2)
 library(scales)
-library(leaflet)
 rm(list = ls())
 
 # The functions might be useful for A4
