@@ -3,6 +3,7 @@ library(dplyr)
 library(stringr)
 library(ggplot2)
 library(scales)
+library(leaflet)
 rm(list = ls())
 
 # The functions might be useful for A4
@@ -209,15 +210,112 @@ plot_jail_pop_by_states <- function(states) {
 
 ## Section 5  ----
 #----------------------------------------------------------------------------#
-# Changes in Incarceration Rates by Gender Across Western States
-# The following section contains data wrangling functions for analyzing how
-# gender disparities in the incarceration rates of counties in the Western
-# United States.
+# Changes in Incarceration Rates by Gender Across Regions of the United States
+# The following section contains data wrangling functions for analyzing
+# gender disparities in the incarceration rates of men and woman across
+# each region of the United States (as indicated by the divisions Midwest,
+# Northeast, South, West).
 #----------------------------------------------------------------------------#
+# Organizes data by region and jail population rates for men and
+# women separately.
+#
+# Returns:
+#   A tibble of data mapping regions of the United States to their respective
+#   jail population rates for men and women, organized by year.
+get_jail_gender_rates <- function() {
+  gender_df <- incarceration_df %>%
+    group_by(region, year) %>%
+    summarize(avg_female_jail_rate = mean(female_jail_pop_rate,
+                                          na.rm = TRUE),
+              avg_male_jail_rate = mean(male_jail_pop_rate,
+                                        na.rm = TRUE),
+              .groups = "drop") %>%
+    gather(
+      key = gender,
+      value = rate,
+      -region, -year
+    ) %>%
+    mutate(gender = str_replace(gender, "avg_male_jail_rate", "Male Rate"),
+           gender = str_replace(gender, "avg_female_jail_rate", "Female Rate"),
+           region = paste(region, gender)) %>%
+  return(gender_df)
+}
+
+# Generates a line chart of female to male jail population rates for each region
+# of the United States from 1980-2015.
+#
+# Returns:
+#   A line chart showing trends in jail population rates of men and women
+#   in the United States across different regions of the United States
+plot_jail_gender_rates <- function() {
+  plot_data <- get_jail_gender_rates()
+  gender_plot <- ggplot(data = plot_data, mapping = aes(
+                                            x = year,
+                                            y = rate,
+                                            color = region)) +
+    geom_point() +
+    geom_smooth() +
+    labs(
+      title = "Average Jail Population Rates for Men and Women by U.S. Region
+      (1980-2015)",
+      caption = "Men experienced a larger growth in jail population rates than
+      women, and certain regions of the U.S. saw larger changes in growth rates
+      compared to others",
+      x = "Year",
+      y = "Jail Population Rate per 100k People",
+      color = "Region"
+    )
+  return(gender_plot)
+}
 
 ## Section 6  ----
 #----------------------------------------------------------------------------#
-# <a map shows potential patterns of inequality that vary geographically>
-# Your functions might go here ... <todo:  update comment>
-# See Canvas
+# Racial Groups with the Highest Incarceration Rates by County
+# This section contains functions for mapping the racial groups with the highest
+# incarceration rates in each county of the United States in 2015.
 #----------------------------------------------------------------------------#
+# Creates a tibble which maps U.S. counties to the racial group with the highest
+# prison population rates in 2015.
+#
+# Returns:
+#   A tibble mapping U.S. counties to the racial group with the highest
+#   jail and prison population rate in 2015.
+get_most_incarcerated <- function() {
+  top_incarcerated_by_county <- incarceration_df %>%
+    filter(year == 2015) %>%
+    replace(is.na(.), 0) %>%
+    mutate(location = paste(county_name, state, sep = ", "),
+           subregion = tolower(str_sub(county_name, 0, -8)),
+           "Asian American/Pacific Islander" = aapi_prison_pop_rate +
+                                               aapi_jail_pop_rate,
+           "Black" = black_prison_pop_rate + black_jail_pop_rate,
+           "Latinx" = latinx_prison_pop_rate + latinx_jail_pop_rate,
+           "Native American" = native_prison_pop_rate + native_jail_pop_rate,
+           "White" = white_prison_pop_rate + white_jail_pop_rate) %>%
+    gather(key = race, value = rate, `Asian American/Pacific Islander`,
+           Black, Latinx, `Native American`, White) %>%
+    select(location, subregion, race, rate) %>%
+    group_by(location) %>%
+    filter(rate > 0 & rate == max(rate)) %>%
+    left_join(map_data("county"), by = "subregion") %>%
+    ungroup() %>%
+    na.omit()
+  return(top_incarcerated_by_county)
+}
+
+# Generates a choropleth map of counties and the most incarcerated racial group
+# in each county for the year 2015.
+#
+# Returns:
+#   A choropleth map which is colored based on racial group for each U.S. county
+#   in 2015.
+plot_most_incarcerated_by_county <- function() {
+  plot_data <- get_most_incarcerated()
+  racial_plot <- leaflet(data = plot_data) %>%
+    addProviderTiles("CartoDB.Positron") %>%
+    setView(lat = 37.0902, lng = -95.7129, zoom = 4) %>%
+    addPolygons(lat = ~lat,
+                lng = ~long,
+                popup = ~location)
+  return(racial_plot)
+}

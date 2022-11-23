@@ -189,7 +189,7 @@ The issue of mass incarceration deserves recognition by agencies of all levels,
 including local communities whose lack of legal resources may cause the people
 living there to be underrepresented.
 
-## Charts and Plots
+## Growth of the U.S. Prison Population
 
 ```{r jail_pop, echo = FALSE, message = FALSE}
 plot_jail_pop_for_us()
@@ -220,6 +220,35 @@ at a faster rate in states with higher population counts, such as California
 and Texas, than states with lower population counts, such as South Dakota. In
 most cases, jail population counts steadily increased between 1980 and the 
 mid 2000s, after which these counts began to stabilize or taper slightly.
+
+## Changes in Jail Population Rates by Gender Across Regions of the United States
+
+```{r us_jail_rates_gender, echo = FALSE, message = FALSE}
+plot(plot_jail_gender_rates())
+```  
+
+**How have jail population rates changed by gender and region of the U.S.
+since 1980?**
+
+Although the previous chart of U.S. jail population growth shows how the
+national jail population has risen in the past few decades, it fails to uncover
+the nuances in jail population demographics. By contrast, this chart of average
+jail population rates for men and women, as separated by U.S. region, reveals
+how in general, the jail population rate of men has increased at a larger rate
+than that of women. The most notable feature of this chart, however, is the fact
+that certain regions of U.S. appear to have higher jail growth rates than other
+regions. For instance, the jail population rates of both men and women
+experienced the largest growth in the Southern region of the United States
+than in the Midwest or the Northeast. A further case for analysis could be how
+these observations correlate to population makeup in each of these regions,
+for it's possible that the higher jail population rates in regions like the
+South are tied to racial inequality.
+
+## Racial Groups with the Highest Incarceration Rates by County
+
+#```{r county_map_highest_rates, echo = FALSE, message = FALSE}
+#plot(plot_jail_gender_rates())
+#```
 
 
 
