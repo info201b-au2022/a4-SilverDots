@@ -18,16 +18,16 @@ library(kableExtra)
 Incarceration rates in the United States have increased in recent years, but
 the issue itself does not revolve around population density so much as it
 is a reflection of emerging trends in the American justice system. Racial,
-gender, and population size disparities are among several of the many ways in
-which particular groups of people are disproportionately affected by mass
-incarceration. This report aims to identify key inequalities and patterns
+gender, and population size disparities manifest in incarceration statistics,
+illustrating how particular groups of people are disproportionately affected by
+the issue. This report aims to identify key inequalities and patterns
 found in American incarceration data as potential areas for further reform.
 
 ## Introduction 
 From 1970 to 2014, the United States experienced an almost four-fold increase in
-its national prison population. The reasons for imprisonment abound; people
-often face pretrial detention, where they are sent to jail to await trial,
-and prison overcrowding uses local jails to accept transfers
+its national prison population. The reasons for imprisonment abound: potential
+criminals frequently face pretrial detention, where they are sent to jail to
+await trial, and prison overcrowding causes local jails to accept transfers
 from state and federal prisons. The Vera Institute's research shows that
 although the national jail admission rate has decreased in recent years, the
 active growth in the daily jail population suggests that the average length of
@@ -71,14 +71,14 @@ human lives, a story of how confinement has shaped the lives, families,
 and communities of those subjected to time behind bars. Every person facing
 imprisonment brings with them a unique set of circumstances, and so extra care
 must be taken to understand how their background and identity could have played
-a role in their incarceration. In other words, We must take initiative
-to analyze the data to shed light on not only the root causes of American mass
-incarceration, but also determine what steps the **indirect stakeholders** of
-this data, which includes whole communities, local support groups,
-organizations, systems designers, and policymakers, should take to resolve
-disparities in prison demographics. Rather than pouring economic resources into
-the construction of expensive prisons—which only works to perpetuate gender and
-racial disparities in incarceration—policymakers should consider reinvesting
+a role in their incarceration. In other words, we must take the initiative to
+shed light on not only the root causes of American mass incarceration, but also
+determine what steps the **indirect stakeholders** of this data, which includes
+whole communities, local support groups, organizations, systems designers, and
+policymakers, should take to resolve disparities in prison demographics. Rather
+than pouring economic resources into the construction of expensive prisons—which
+only works to perpetuate gender and racial disparities in
+incarceration—policymakers should consider reinvesting
 in communities and pursuing criminal justice reform. To this end, the analysis
 in this report will highlight existing problem areas that could serve as a
 starting point for further discussion.
@@ -97,6 +97,13 @@ United States in 2014?
 United States in 2014?
 * Which counties had the highest average prison population from 2000 to
 2014?
+* How has the U.S. jail population changed over time?
+* How have state jail population counts changed over time in the United
+States?
+* How have jail population rates changed by gender and region of the U.S.
+since 1980?
+* Which racial groups had the highest incarceration rates across Southern
+counties in 2015?
 
 ## Data Summary 
 
